@@ -18,7 +18,8 @@ if __name__ == '__main__':
     # initializaadction 
     GAIN = 2/3  
     curState = 0
-    thresh = 540  # mid point in the waveform
+    threshSetting = 560
+    thresh = threshSetting  # mid point in the waveform
     P = 512
     T = 512
     stateChanged = 0
@@ -37,6 +38,7 @@ if __name__ == '__main__':
         while True:
             # read from the ADC
             Signal = int(ADC.read(0))*4
+	    # print "signal: " + str(Signal)
             ADC.write(0)
             curTime = int(time.time()*1000)
 
@@ -56,7 +58,7 @@ if __name__ == '__main__':
 
             #  NOW IT'S TIME TO LOOK FOR THE HEART BEAT
             # signal surges up in value every time there is a pulse
-            if N > 100 :                                   # avoid high frequency noise
+            if N > 250 :                                   # avoid high frequency noise
                 if  (Signal > thresh) and  (Pulse == False) and  (N > (IBI/5.0)*3.0)  :       
                     Pulse = True;                               # set the Pulse flag when we think there is a pulse
                     IBI = sampleCounter - lastBeatTime;         # measure time between beats in mS
@@ -91,6 +93,7 @@ if __name__ == '__main__':
 		   socketIO.emit('heartbeat', str(0))
 
             if Signal < thresh and Pulse == True :   # when the values are going down, the beat is over
+		print "over"
                 Pulse = False;                         # reset the Pulse flag so we can do it again
                 amp = P - T;                           # get amplitude of the pulse wave
                 thresh = amp/2 + T;                    # set thresh at 50% of the amplitude
@@ -98,13 +101,19 @@ if __name__ == '__main__':
                 T = thresh;
 
             if N > 2500 :                          # if 2.5 seconds go by without a beat
-                thresh = 512;                          # set thresh default
+		print "without"
+                thresh = threshSetting;                          # set thresh default
                 P = 512;                               # set P default
                 T = 512;                               # set T default
-                lastBeatTime = sampleCounter;          # bring the lastBeatTime up to date        
+		sampleCounter = 0;
+		lastBeatTime = 0;
                 firstBeat = True;                      # set these to avoid noise
                 secondBeat = False;                    # when we get the heartbeat back
+		Pulse = False;
+		IBI = 600
+		rate = [0]*10
+		amp = 100
                 print "no beats found"
 		socketIO.emit('heartbeat', str(0))
 
-            time.sleep(0.01)
+            time.sleep(0.1)
