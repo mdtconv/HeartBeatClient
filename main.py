@@ -48,7 +48,7 @@ if __name__ == '__main__':
             ##  find the peak and trough of the pulse wave
             if Signal < thresh and N > (IBI/5.0)*3.0 :  #       # avoid dichrotic noise by waiting 3/5 of last IBI
                 if Signal < T :                        # T is the trough
-                T = Signal;                         # keep track of lowest point in pulse wave 
+                    T = Signal;                         # keep track of lowest point in pulse wave 
 
             if Signal > thresh and  Signal > P:           # thresh condition helps avoid noise
                 P = Signal;                             # P is the peak
@@ -58,14 +58,14 @@ if __name__ == '__main__':
             # signal surges up in value every time there is a pulse
             if N > 100 :                                   # avoid high frequency noise
                 if  (Signal > thresh) and  (Pulse == False) and  (N > (IBI/5.0)*3.0)  :       
-                Pulse = True;                               # set the Pulse flag when we think there is a pulse
-                IBI = sampleCounter - lastBeatTime;         # measure time between beats in mS
-                lastBeatTime = sampleCounter;               # keep track of time for next pulse
+                    Pulse = True;                               # set the Pulse flag when we think there is a pulse
+                    IBI = sampleCounter - lastBeatTime;         # measure time between beats in mS
+                    lastBeatTime = sampleCounter;               # keep track of time for next pulse
 
                 if secondBeat :                        # if this is the second beat, if secondBeat == TRUE
                     secondBeat = False;                  # clear secondBeat flag
                     for i in range(0,10):             # seed the running total to get a realisitic BPM at startup
-                    rate[i] = IBI;                      
+                        rate[i] = IBI;                      
 
                 if firstBeat :                        # if it's the first time we found a beat, if firstBeat == TRUE
                     firstBeat = False;                   # clear firstBeat flag
