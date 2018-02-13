@@ -3,7 +3,7 @@ import time
 from random import *
 
 
-with SocketIO('127.0.0.1', 3000, LoggingNamespace) as socketIO:
+with SocketIO('13.125.124.80', 3000, LoggingNamespace) as socketIO:
     while True:
         socketIO.emit('heartbeat',str(randint(60, 120)))
         time.sleep(1);
