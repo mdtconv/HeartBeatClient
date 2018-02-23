@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # initializaadction 
     GAIN = 2/3  
     curState = 0
-    threshSetting = 560
+    threshSetting = 580
     thresh = threshSetting  # mid point in the waveform
     P = 512
     T = 512
