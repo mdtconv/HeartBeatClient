@@ -116,4 +116,4 @@ if __name__ == '__main__':
                 print "no beats found"
 		socketIO.emit('heartbeat', str(0))
 
-            time.sleep(1)
+            time.sleep(0.01)
