@@ -89,7 +89,7 @@ if __name__ == '__main__':
                 if BPM < 150: # remove noise
                     print 'BPM: {}'.format(BPM)
                     socketIO.emit('heartbeat',str(BPM)) # Send To Socket IO
-		else:
+		# else:
 		   # socketIO.emit('heartbeat', str(0))
 
             if Signal < thresh and Pulse == True :   # when the values are going down, the beat is over
