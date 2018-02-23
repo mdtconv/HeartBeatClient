@@ -90,7 +90,7 @@ if __name__ == '__main__':
                     print 'BPM: {}'.format(BPM)
                     socketIO.emit('heartbeat',str(BPM)) # Send To Socket IO
 		else:
-		   socketIO.emit('heartbeat', str(0))
+		   # socketIO.emit('heartbeat', str(0))
 
             if Signal < thresh and Pulse == True :   # when the values are going down, the beat is over
 		print "over"
