@@ -71,7 +71,8 @@ if __name__ == '__main__':
 
           #  NOW IT'S TIME TO LOOK FOR THE HEART BEAT
           # signal surges up in value every time there is a pulse
-        if N > 100 :                                   # avoid high frequency noise
+	# print N
+        if N > 500 :                                   # avoid high frequency noise
             if  (Signal > thresh) and  (Pulse == False) and  (N > (IBI/5.0)*3.0)  :       
               Pulse = True;                               # set the Pulse flag when we think there is a pulse
               IBI = sampleCounter - lastBeatTime;         # measure time between beats in mS
@@ -102,6 +103,7 @@ if __name__ == '__main__':
               if BPM < 150 and BPM > 50: # remove noise
               	print 'BPM: {}'.format(BPM)
 		emit(BPM)
+		print N
 		t = threading.Thread(target=vibrate)
 		t.start()
 	      else:
@@ -121,7 +123,7 @@ if __name__ == '__main__':
             P = thresh;                            # reset these for next time
             T = thresh;
 
-        if N > 1000 :                          # if 2.5 seconds go by without a beat
+        if N > 1500 :                          # if 2.5 seconds go by without a beat
             thresh = 550;                          # set thresh default
             P = 512;                               # set P default
             T = 512;                               # set T default
@@ -131,5 +133,5 @@ if __name__ == '__main__':
 	    emit(0)
             print "no beats found"
 
-        time.sleep(0.01)
+        time.sleep(0.1)
 
