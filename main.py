@@ -118,5 +118,5 @@ if __name__ == '__main__':
             secondBeat = False;                    # when we get the heartbeat back
             print "no beats found"
 
-        time.sleep(0.02)
+        time.sleep(0.05)
 
