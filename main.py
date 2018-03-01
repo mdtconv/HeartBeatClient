@@ -100,6 +100,7 @@ if __name__ == '__main__':
 		lastBeatTime = sampleCounter;
 		firstBeat = True;
 		secondBeat = False;
+		emit(0)
 		print "no beats found"
 
         if Signal < thresh and Pulse == True:   # when the values are going down, the beat is over
@@ -116,6 +117,7 @@ if __name__ == '__main__':
             lastBeatTime = sampleCounter;          # bring the lastBeatTime up to date        
             firstBeat = True;                      # set these to avoid noise
             secondBeat = False;                    # when we get the heartbeat back
+	    emit(0)
             print "no beats found"
 
         time.sleep(0.05)
