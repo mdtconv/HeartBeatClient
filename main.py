@@ -5,6 +5,7 @@
 # Author: Udayan Kumar
 # License: Public Domain
 
+import threading
 import time
 import PCF8591 as ADC
 from socketIO_client_nexus import SocketIO, LoggingNamespace
@@ -17,6 +18,14 @@ def connect():
 def emit(msg):
     global socket
     socket.emit('heartbeat', str(msg))
+
+def vibrate():
+    ADC.setup(0x48)
+    ADC.write(255)
+    time.sleep(0.3)
+    ADC.write(0)
+    print "vibrate!"
+
 
 if __name__ == '__main__':
     connect()
@@ -43,7 +52,7 @@ if __name__ == '__main__':
     while True:
 		# read from the ADC
         Signal = int(ADC.read(0))*4
-        ADC.write(0)
+        # ADC.write(255)
         curTime = int(time.time()*1000)
 
         sampleCounter += curTime - lastTime;      #                   # keep track of the time in mS with this variable
@@ -93,6 +102,8 @@ if __name__ == '__main__':
               if BPM < 150 and BPM > 50: # remove noise
               	print 'BPM: {}'.format(BPM)
 		emit(BPM)
+		t = threading.Thread(target=vibrate)
+		t.start()
 	      else:
 		thresh = 550
 		P = 512;
@@ -120,5 +131,5 @@ if __name__ == '__main__':
 	    emit(0)
             print "no beats found"
 
-        time.sleep(0.05)
+        time.sleep(0.01)
 
