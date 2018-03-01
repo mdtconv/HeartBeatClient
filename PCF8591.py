@@ -57,6 +57,6 @@ if __name__ == "__main__":
 	setup(0x48)
 	while True:
 		val = read(0)
-		print val
-		write(read(0))
-#		time.sleep(0.3)
+		print (val)
+		# write(read(0))
+#		time.sleep(0.05)
