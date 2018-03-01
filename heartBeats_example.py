@@ -90,7 +90,6 @@ if __name__ == '__main__':
 		firstBeat = True;
 		secondBeat = False;
 		print "no beats found"
-		time.sleep(0.02)
 
         if Signal < thresh and Pulse == True:   # when the values are going down, the beat is over
             Pulse = False;                         # reset the Pulse flag so we can do it again
