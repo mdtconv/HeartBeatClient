@@ -133,5 +133,5 @@ if __name__ == '__main__':
 	    emit(0)
             print "no beats found"
 
-        time.sleep(0.1)
+        time.sleep(0.05)
 
