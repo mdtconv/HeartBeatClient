@@ -123,7 +123,7 @@ if __name__ == '__main__':
             P = thresh;                            # reset these for next time
             T = thresh;
 
-        if N > 2000 :                          # if 2.5 seconds go by without a beat
+        if N > 3000 :                          # if 2.5 seconds go by without a beat
             thresh = 535;                          # set thresh default
             P = 512;                               # set P default
             T = 512;                               # set T default
